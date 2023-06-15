@@ -12,5 +12,7 @@ public interface DriverService {
 
     public Driver addDriver(Driver driver);
 
+    void removeById(int id);
+
    Optional<Driver> getDriverById(int id);
 }

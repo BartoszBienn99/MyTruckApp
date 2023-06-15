@@ -23,9 +23,11 @@ private DriverServiceImpl driverService;
 }
 
 @GetMapping("/{id}")
-    public Optional<Driver> getDriverById(@PathVariable int id) {
+    public ResponseEntity<Driver> getDriverById(@PathVariable int id) {
     Optional<Driver> response = driverService.getDriverById(id);
-    return response;
+    return response
+            .map(driverResponse -> ResponseEntity.ok(driverResponse))
+            .orElseGet(() -> ResponseEntity.notFound().build());
 
 }
 
@@ -37,7 +39,16 @@ private DriverServiceImpl driverService;
             .body(savedDriver);
 }
 
-
+@DeleteMapping
+    public ResponseEntity<Void> removeDriverById(@PathVariable int id) {
+    if(driverService.getDriverById(id).isEmpty()) {
+        return ResponseEntity.notFound().build();
+    } else {
+        driverService.removeById(id);
+        return ResponseEntity.noContent().build();
+    }
+    }
 }
+
 
 

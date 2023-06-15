@@ -25,6 +25,12 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public void removeById(int id) {
+        driverRepository.deleteById(id);
+
+    }
+
+    @Override
     public Optional<Driver> getDriverById(int id) {
         Optional<Driver> optional = driverRepository.findById(id);
         Driver driver = null;
