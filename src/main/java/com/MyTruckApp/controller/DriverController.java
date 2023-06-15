@@ -18,8 +18,7 @@ public class DriverController {
     @Autowired
     private DriverServiceImpl driverService;
 
-    @Autowired
-    private DriverRepository driverRepository;
+
 
 
 

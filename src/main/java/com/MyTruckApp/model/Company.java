@@ -2,6 +2,9 @@ package com.MyTruckApp.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "companies")
 public class Company {
@@ -10,9 +13,13 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     private String companyName;
     private String productName;
     private String country;
+
+    @OneToMany(mappedBy ="company")
+    private List<Driver> drivers;
 
     public Company(int id, String companyName, String productName, String country) {
         this.id = id;
