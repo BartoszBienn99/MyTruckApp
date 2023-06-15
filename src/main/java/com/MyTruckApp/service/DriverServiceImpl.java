@@ -20,7 +20,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Driver getDriverById(int id) {
+    public Optional<Driver> getDriverById(int id) {
         Optional<Driver> optional = driverRepository.findById(id);
         Driver driver = null;
         if(optional.isPresent()){
@@ -28,6 +28,6 @@ public class DriverServiceImpl implements DriverService {
         } else {
             throw new RuntimeException("Nie znaleziono kierowcy o id: " + id);
         }
-        return driver;
+        return driverRepository.findById(id);
     }
 }
