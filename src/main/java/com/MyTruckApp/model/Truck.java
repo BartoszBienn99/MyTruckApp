@@ -2,6 +2,8 @@ package com.MyTruckApp.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "trucks")
 public class Truck {
@@ -13,6 +15,15 @@ public class Truck {
     private String nameOfTruck;
     private String typeOfTruck;
     private String truckBrand;
+
+    @ManyToMany
+    @JoinTable(name = "truck_track",
+    joinColumns = @JoinColumn(name = "truck_id"),
+    inverseJoinColumns = @JoinColumn(name = "track_id"))
+    private List<Track> tracks;
+
+    @OneToOne(mappedBy = "truck")
+    private Driver driver;
 
     public Truck(int id, String nameOfTruck, String typeOfTruck, String truckBrand) {
         this.id = id;

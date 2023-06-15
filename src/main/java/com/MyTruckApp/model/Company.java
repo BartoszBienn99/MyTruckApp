@@ -18,7 +18,7 @@ public class Company {
     private String productName;
     private String country;
 
-    @OneToMany(mappedBy ="company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Driver> drivers;
 
     public Company(int id, String companyName, String productName, String country) {

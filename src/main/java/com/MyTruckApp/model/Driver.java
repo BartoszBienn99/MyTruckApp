@@ -14,9 +14,13 @@ public class Driver {
     private String driverLastName;
     private boolean isFree;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company")
+    @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
+
+    @OneToOne
+    @JoinColumn(name = "truck_id")
+    private Truck truck;
 
     public Driver(int id, String driverFirstName, String driverLastName, boolean isFree) {
         this.id = id;

@@ -1,7 +1,6 @@
 package com.MyTruckApp.controller;
 
 import com.MyTruckApp.model.Company;
-import com.MyTruckApp.service.CompanyService;
 import com.MyTruckApp.service.CompanyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Company> getCOmpanyById(@PathVariable int id) {
+    public ResponseEntity<Company> getCompanyById(@PathVariable int id) {
         Optional<Company> response = companyService.getCompanyById(id);
         return response
                 .map(companyResponse -> ResponseEntity.ok(companyResponse))
@@ -40,7 +39,7 @@ public class CompanyController {
                 .body(savedCompany);
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     public ResponseEntity<Void> removeCompanyById(@PathVariable int id) {
         if(companyService.getCompanyById(id).isEmpty()) {
             return ResponseEntity.notFound().build();

@@ -2,6 +2,8 @@ package com.MyTruckApp.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tracks")
 public class Track {
@@ -13,6 +15,9 @@ public class Track {
     private String numberOfKilometers;
     private String placeOfDeparture;
     private String placeOfDestination;
+
+    @ManyToMany(mappedBy = "tracks")
+    private List<Truck> trucks;
 
     public Track(int id, String numberOfKilometers, String placeOfDeparture, String placeOfDestination) {
         this.id = id;
