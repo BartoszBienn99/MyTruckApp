@@ -31,14 +31,26 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Optional<Driver> getDriverById(int id) {
+    public void setIsFree(boolean isFree, Integer id) {
         Optional<Driver> optional = driverRepository.findById(id);
-        Driver driver = null;
         if(optional.isPresent()){
-            driver = optional.get();
+           Driver driver = optional.get();
+            driver.setFree(isFree);
+            driverRepository.save(driver);
         } else {
             throw new RuntimeException("Nie znaleziono kierowcy o id: " + id);
         }
-        return driverRepository.findById(id);
+
+    }
+
+
+    @Override
+    public Optional<Driver> getDriverById(int id) {
+        Optional<Driver> optional = driverRepository.findById(id);
+        if(optional.isEmpty())
+        {
+            throw new RuntimeException("Nie znaleziono kierowcy o id: " + id);
+        }
+        return optional;
     }
 }

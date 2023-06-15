@@ -10,9 +10,11 @@ public interface DriverService {
 
     List<Driver> getAllDrivers();
 
-    public Driver addDriver(Driver driver);
+    Driver addDriver(Driver driver);
 
     void removeById(int id);
+
+    void setIsFree(boolean isFree, Integer id);
 
    Optional<Driver> getDriverById(int id);
 }
