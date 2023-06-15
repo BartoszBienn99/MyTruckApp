@@ -3,10 +3,9 @@ package com.MyTruckApp.controller;
 import com.MyTruckApp.model.Driver;
 import com.MyTruckApp.service.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +27,14 @@ private DriverServiceImpl driverService;
     Optional<Driver> response = driverService.getDriverById(id);
     return response;
 
+}
+
+@PostMapping
+   public ResponseEntity<Driver> addNewDriver(@RequestBody Driver requestDriver) {
+    Driver savedDriver = driverService.addDriver(requestDriver);
+    return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(savedDriver);
 }
 
 

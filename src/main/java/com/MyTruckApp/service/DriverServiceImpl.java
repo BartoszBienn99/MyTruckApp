@@ -20,6 +20,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public Driver addDriver(Driver driver) {
+        return driverRepository.save(driver);
+    }
+
+    @Override
     public Optional<Driver> getDriverById(int id) {
         Optional<Driver> optional = driverRepository.findById(id);
         Driver driver = null;
