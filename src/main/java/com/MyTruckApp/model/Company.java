@@ -3,7 +3,7 @@ package com.MyTruckApp.model;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "companies")
@@ -21,11 +21,12 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Driver> drivers;
 
-    public Company(int id, String companyName, String productName, String country) {
+    public Company(int id, String companyName, String productName, String country, List<Driver> drivers) {
         this.id = id;
         this.companyName = companyName;
         this.productName = productName;
         this.country = country;
+        this.drivers = drivers;
     }
 
     public Company() {
@@ -61,6 +62,14 @@ public class Company {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<Driver> getDrivers() {
+        return drivers;
+    }
+
+    public void setDrivers(List<Driver> drivers) {
+        this.drivers = drivers;
     }
 
     @Override

@@ -14,19 +14,20 @@ public class Driver {
     private String driverLastName;
     private boolean isFree;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "truck_id")
     private Truck truck;
 
-    public Driver(int id, String driverFirstName, String driverLastName, boolean isFree) {
-        this.id = id;
+    public Driver(String driverFirstName, String driverLastName, boolean isFree, Company company, Truck truck) {
         this.driverFirstName = driverFirstName;
         this.driverLastName = driverLastName;
         this.isFree = isFree;
+        this.company = company;
+        this.truck = truck;
     }
 
 
@@ -63,6 +64,22 @@ public class Driver {
 
     public void setFree(boolean free) {
         isFree = free;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Truck getTruck() {
+        return truck;
+    }
+
+    public void setTruck(Truck truck) {
+        this.truck = truck;
     }
 
     @Override

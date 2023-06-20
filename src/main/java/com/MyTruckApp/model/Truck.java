@@ -16,20 +16,22 @@ public class Truck {
     private String typeOfTruck;
     private String truckBrand;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "truck_track",
     joinColumns = @JoinColumn(name = "truck_id"),
     inverseJoinColumns = @JoinColumn(name = "track_id"))
     private List<Track> tracks;
 
-    @OneToOne(mappedBy = "truck")
+    @OneToOne(mappedBy = "truck", cascade = CascadeType.ALL)
     private Driver driver;
 
-    public Truck(int id, String nameOfTruck, String typeOfTruck, String truckBrand) {
+    public Truck(int id, String nameOfTruck, String typeOfTruck, String truckBrand, List<Track> tracks, Driver driver) {
         this.id = id;
         this.nameOfTruck = nameOfTruck;
         this.typeOfTruck = typeOfTruck;
         this.truckBrand = truckBrand;
+        this.tracks = tracks;
+        this.driver = driver;
     }
 
     public Truck() {
@@ -65,6 +67,22 @@ public class Truck {
 
     public void setTruckBrand(String truckBrand) {
         this.truckBrand = truckBrand;
+    }
+
+    public List<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
     @Override

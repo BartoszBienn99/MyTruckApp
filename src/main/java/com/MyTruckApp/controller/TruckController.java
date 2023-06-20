@@ -1,6 +1,9 @@
 package com.MyTruckApp.controller;
 
+import com.MyTruckApp.model.Driver;
 import com.MyTruckApp.model.Truck;
+import com.MyTruckApp.repository.DriverRepository;
+import com.MyTruckApp.repository.TruckRepository;
 import com.MyTruckApp.service.TruckServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,12 @@ public class TruckController {
 
     @Autowired
     private TruckServiceImpl truckService;
+
+    @Autowired
+    private DriverRepository driverRepository;
+
+    @Autowired
+    private TruckRepository truckRepository;
 
     @GetMapping
     public List<Truck> getAllTrucks() {
@@ -47,6 +56,5 @@ public class TruckController {
             return ResponseEntity.noContent().build();
         }
     }
+    }
 
-
-}

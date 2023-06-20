@@ -16,14 +16,15 @@ public class Track {
     private String placeOfDeparture;
     private String placeOfDestination;
 
-    @ManyToMany(mappedBy = "tracks")
+    @ManyToMany(mappedBy = "tracks", cascade = CascadeType.ALL)
     private List<Truck> trucks;
 
-    public Track(int id, String numberOfKilometers, String placeOfDeparture, String placeOfDestination) {
+    public Track(int id, String numberOfKilometers, String placeOfDeparture, String placeOfDestination, List<Truck> trucks) {
         this.id = id;
         this.numberOfKilometers = numberOfKilometers;
         this.placeOfDeparture = placeOfDeparture;
         this.placeOfDestination = placeOfDestination;
+        this.trucks = trucks;
     }
 
     public Track() {
@@ -59,6 +60,14 @@ public class Track {
 
     public void setPlaceOfDestination(String placeOfDestination) {
         this.placeOfDestination = placeOfDestination;
+    }
+
+    public List<Truck> getTrucks() {
+        return trucks;
+    }
+
+    public void setTrucks(List<Truck> trucks) {
+        this.trucks = trucks;
     }
 
     @Override

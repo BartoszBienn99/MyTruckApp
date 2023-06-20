@@ -1,7 +1,9 @@
 package com.MyTruckApp.controller;
 
+import com.MyTruckApp.dto.UpdateDriverDto;
+import com.MyTruckApp.model.Company;
 import com.MyTruckApp.model.Driver;
-import com.MyTruckApp.repository.DriverRepository;
+import com.MyTruckApp.model.Truck;
 import com.MyTruckApp.service.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,10 +19,6 @@ public class DriverController {
 
     @Autowired
     private DriverServiceImpl driverService;
-
-
-
-
 
     @GetMapping
     public List<Driver> getAllDrivers() {
@@ -44,7 +42,7 @@ public class DriverController {
                 .body(savedDriver);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeDriverById(@PathVariable int id) {
         if (driverService.getDriverById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -52,16 +50,21 @@ public class DriverController {
             driverService.removeById(id);
             return ResponseEntity.noContent().build();
         }
-
     }
 
-    @PatchMapping("drivers/{id}")
+
+    @PatchMapping("/{id}")
     public ResponseEntity<Boolean> updateDriver(@PathVariable int id, @RequestBody boolean isFree) {
         driverService.setIsFree(isFree, id);
         return ResponseEntity.ok(isFree);
 
 
+    }
 
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<Integer> updateDriverInfo(@PathVariable int id, @RequestBody UpdateDriverDto updateDriverDto) {
+        driverService.updateDriver(id, updateDriverDto);
+        return ResponseEntity.ok(id);
     }
 
 }
