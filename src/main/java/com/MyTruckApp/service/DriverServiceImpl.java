@@ -47,7 +47,11 @@ public class DriverServiceImpl implements DriverService {
             if(truck != null) {
                 driver.setTruck(null);
             }
-            driverRepository.delete(driver);
+            Company company = driver.getCompany();
+            if(company != null) {
+                driver.setCompany(null);
+            }
+            driverRepository.deleteById(id);
         }
     }
 
