@@ -14,11 +14,11 @@ public class Driver {
     private String driverLastName;
     private boolean isFree;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "truck_id")
     private Truck truck;
 

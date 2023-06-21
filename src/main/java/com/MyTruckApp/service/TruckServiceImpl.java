@@ -1,5 +1,7 @@
 package com.MyTruckApp.service;
+import com.MyTruckApp.model.Driver;
 import com.MyTruckApp.model.Truck;
+import com.MyTruckApp.repository.DriverRepository;
 import com.MyTruckApp.repository.TruckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ public class TruckServiceImpl implements TruckService {
 
     @Autowired
     private TruckRepository truckRepository;
+    @Autowired
+    private DriverRepository driverRepository;
 
     @Override
     public List<Truck> getAllTrucks() {
@@ -27,7 +31,15 @@ public class TruckServiceImpl implements TruckService {
 
     @Override
     public void removeById(int id) {
-    truckRepository.deleteById(id);
+        Optional<Truck> optionalTruck = truckRepository.findById(id);
+        if(optionalTruck.isPresent()) {
+            Optional<Driver> optionalDriver = Optional.ofNullable(optionalTruck.get().getDriver());
+            optionalDriver.ifPresent(driver -> {
+                driver.setTruck(null);
+                driverRepository.save(driver);
+            });
+        }
+        truckRepository.deleteById(id);
     }
 
     @Override

@@ -38,7 +38,7 @@ public class TrackController {
                 .body(savedTrack);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeTrackById(@PathVariable int id) {
         if(trackService.getTrackById(id).isEmpty()){
             return ResponseEntity.notFound().build();

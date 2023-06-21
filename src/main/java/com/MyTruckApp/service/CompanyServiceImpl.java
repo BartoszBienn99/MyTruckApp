@@ -3,6 +3,7 @@ package com.MyTruckApp.service;
 import com.MyTruckApp.model.Company;
 import com.MyTruckApp.model.Driver;
 import com.MyTruckApp.repository.CompanyRepository;
+import com.MyTruckApp.repository.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public class CompanyServiceImpl implements CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @Autowired
+    private DriverRepository driverRepository;
 
     @Override
     public List<Company> getAllCompanies() {
@@ -28,14 +31,20 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void removeById(int id) {
-        companyRepository.deleteById(id);
+        Optional<Company> optionalCompany = companyRepository.findById(id);
+        if (optionalCompany.isPresent()) {
+            for (Driver driver : optionalCompany.get().getDrivers()) {
+                driver.setCompany(null);
+                driverRepository.save(driver);
+            }
+            companyRepository.deleteById(id);
+        }
     }
 
     @Override
     public Optional<Company> getCompanyById(int id) {
         Optional<Company> optional = companyRepository.findById(id);
-        if(optional.isEmpty())
-        {
+        if (optional.isEmpty()) {
             throw new RuntimeException("Nie znaleziono firmy o id: " + id);
         }
         return optional;

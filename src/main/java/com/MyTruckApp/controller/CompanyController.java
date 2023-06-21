@@ -39,7 +39,7 @@ public class CompanyController {
                 .body(savedCompany);
     }
 
-    @PostMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeCompanyById(@PathVariable int id) {
         if(companyService.getCompanyById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -48,7 +48,6 @@ public class CompanyController {
             return ResponseEntity.noContent().build();
         }
     }
-
 
 
 }

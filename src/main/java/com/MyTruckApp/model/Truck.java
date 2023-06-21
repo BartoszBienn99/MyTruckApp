@@ -1,5 +1,6 @@
 package com.MyTruckApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class Truck {
     inverseJoinColumns = @JoinColumn(name = "track_id"))
     private List<Track> tracks;
 
-    @OneToOne(mappedBy = "truck", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "truck")
+    @JsonIgnore
     private Driver driver;
 
     public Truck(int id, String nameOfTruck, String typeOfTruck, String truckBrand, List<Track> tracks, Driver driver) {

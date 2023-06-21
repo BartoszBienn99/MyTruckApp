@@ -47,7 +47,7 @@ public class TruckController {
                 .body(savedTruck);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeTruckById(@PathVariable int id) {
         if(truckService.getTruckById(id).isEmpty()){
             return ResponseEntity.notFound().build();
@@ -56,5 +56,4 @@ public class TruckController {
             return ResponseEntity.noContent().build();
         }
     }
-    }
-
+}

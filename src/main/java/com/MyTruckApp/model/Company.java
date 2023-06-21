@@ -1,5 +1,6 @@
 package com.MyTruckApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,7 +19,8 @@ public class Company {
     private String productName;
     private String country;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company")
+    @JsonIgnore
     private List<Driver> drivers;
 
     public Company(int id, String companyName, String productName, String country, List<Driver> drivers) {
