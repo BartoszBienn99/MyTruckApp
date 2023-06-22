@@ -1,5 +1,6 @@
 package com.MyTruckApp.controller;
 
+import com.MyTruckApp.dto.AddTrackToTruckDto;
 import com.MyTruckApp.model.Track;
 import com.MyTruckApp.model.Truck;
 import com.MyTruckApp.repository.DriverRepository;
@@ -63,8 +64,8 @@ public class TruckController {
     }
 
     @PatchMapping("/addTrackToTruck/{id}")
-    public ResponseEntity<Void> addTrackToTruck(@PathVariable int id, @RequestBody int trackId){
-      Optional<Track> optionalTrack = trackService.getTrackById(trackId);
+    public ResponseEntity<Void> addTrackToTruck(@PathVariable int id, @RequestBody AddTrackToTruckDto addTrackToTruckDto){
+      Optional<Track> optionalTrack = trackService.getTrackById(addTrackToTruckDto.getTrackId());
       Optional<Truck> optionalTruck = truckService.getTruckById(id);
 
       if(optionalTrack.isEmpty() || optionalTruck.isEmpty()){
