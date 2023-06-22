@@ -5,6 +5,10 @@ public class UpdateDriverDto {
     private int companyId;
     private int truckId;
 
+    public UpdateDriverDto() {
+
+    }
+
     public int getCompanyId() {
         return companyId;
     }
