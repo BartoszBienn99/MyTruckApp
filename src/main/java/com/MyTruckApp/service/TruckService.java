@@ -1,4 +1,5 @@
 package com.MyTruckApp.service;
+import com.MyTruckApp.model.Track;
 import com.MyTruckApp.model.Truck;
 import java.util.List;
 import java.util.Optional;
@@ -13,4 +14,6 @@ public interface TruckService {
     void removeById(int id);
 
     Optional<Truck> getTruckById(int id);
+
+    void addTrackToTruck(Truck truck, Track track);
 }

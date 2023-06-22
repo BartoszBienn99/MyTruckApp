@@ -1,5 +1,6 @@
 package com.MyTruckApp.service;
 import com.MyTruckApp.model.Driver;
+import com.MyTruckApp.model.Track;
 import com.MyTruckApp.model.Truck;
 import com.MyTruckApp.repository.DriverRepository;
 import com.MyTruckApp.repository.TruckRepository;
@@ -50,5 +51,13 @@ public class TruckServiceImpl implements TruckService {
                 throw new RuntimeException("Nie znaleziono ciężarówki o id: " + id);
             }
             return optional;
+    }
+
+    @Override
+    public void addTrackToTruck(Truck truck, Track track) {
+        List<Track> tracks = truck.getTracks();
+        tracks.add(track);
+        truck.setTracks(tracks);
+        truckRepository.save(truck);
     }
 }

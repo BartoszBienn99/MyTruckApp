@@ -1,9 +1,10 @@
 package com.MyTruckApp.controller;
 
-import com.MyTruckApp.model.Driver;
+import com.MyTruckApp.model.Track;
 import com.MyTruckApp.model.Truck;
 import com.MyTruckApp.repository.DriverRepository;
 import com.MyTruckApp.repository.TruckRepository;
+import com.MyTruckApp.service.TrackServiceImpl;
 import com.MyTruckApp.service.TruckServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,10 @@ public class TruckController {
 
     @Autowired
     private TruckRepository truckRepository;
+
+    @Autowired
+    private TrackServiceImpl trackService;
+
 
     @GetMapping
     public List<Truck> getAllTrucks() {
@@ -55,5 +60,24 @@ public class TruckController {
             truckService.removeById(id);
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @PatchMapping("/addTrackToTruck/{id}")
+    public ResponseEntity<Void> addTrackToTruck(@PathVariable int id, @RequestBody int trackId){
+      Optional<Track> optionalTrack = trackService.getTrackById(trackId);
+      Optional<Truck> optionalTruck = truckService.getTruckById(id);
+
+      if(optionalTrack.isEmpty() || optionalTruck.isEmpty()){
+          return ResponseEntity.notFound().build();
+      }
+
+      Truck truck = optionalTruck.get();
+      Track track = optionalTrack.get();
+
+
+      truckService.addTrackToTruck(truck, track);
+
+      return ResponseEntity.noContent().build();
+
     }
 }

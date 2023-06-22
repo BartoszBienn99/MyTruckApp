@@ -42,15 +42,6 @@ public class DriverServiceImpl implements DriverService {
     public void removeById(int id) {
         Optional<Driver> driverOptional = driverRepository.findById(id);
         if(driverOptional.isPresent()){
-            Driver driver = driverOptional.get();
-            Truck truck = driver.getTruck();
-            if(truck != null) {
-                driver.setTruck(null);
-            }
-            Company company = driver.getCompany();
-            if(company != null) {
-                driver.setCompany(null);
-            }
             driverRepository.deleteById(id);
         }
     }
@@ -84,7 +75,6 @@ public class DriverServiceImpl implements DriverService {
             throw new RuntimeException("Nie znaleziono Kierowcy/Ciężarówki/Firmy");
         }
     }
-
 
     @Override
     public Optional<Driver> getDriverById(int id) {
