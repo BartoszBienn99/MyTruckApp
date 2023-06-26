@@ -31,7 +31,7 @@ class DriverControllerTest {
     }
 
     @Test
-    void testGetAllDrivers_ShouldReturnListOfDrivers() {
+    void shouldReturnListOfDriversWhenGetAllDriversCalled() {
         // Given
         List<Driver> drivers = new ArrayList<>();
         drivers.add(new Driver());
@@ -48,7 +48,7 @@ class DriverControllerTest {
     }
 
     @Test
-    void testGetDriverById_WithExistingId_ShouldReturnDriver() {
+    void shouldReturnDriverWhenGetDriverByIdCalledWithExistingId() {
         // Given
         int driverId = 1;
         Driver driver = new Driver();
@@ -66,7 +66,7 @@ class DriverControllerTest {
     }
 
     @Test
-    void testGetDriverById_WithNonExistingId_ShouldReturnNotFound() {
+    void shouldReturnNotFoundWhenGetDriverByIdCalledWithNonExistingId() {
         // Given
         int driverId = 1;
 
@@ -82,7 +82,7 @@ class DriverControllerTest {
     }
 
     @Test
-    void testAddNewDriver_ShouldReturnCreatedDriver() {
+    void shouldReturnCreatedDriverWhenAddNewDriverCalled() {
         // Given
         Driver requestDriver = new Driver();
         Driver savedDriver = new Driver();
@@ -99,7 +99,7 @@ class DriverControllerTest {
     }
 
     @Test
-    void testRemoveDriverById_WithExistingId_ShouldReturnNoContent() {
+    void shouldReturnNoContentWhenRemoveDriverByIdCalledWithExistingId() {
         // Given
         int driverId = 1;
 
@@ -116,7 +116,7 @@ class DriverControllerTest {
     }
 
     @Test
-    void testRemoveDriverById_WithNonExistingId_ShouldReturnNotFound() {
+    void shouldReturnNotFoundWhenRemoveDriverByIdCalledWithNonExistingId() {
         // Given
         int driverId = 1;
 
@@ -133,7 +133,7 @@ class DriverControllerTest {
     }
 
     @Test
-    void testUpdateDriver_WithValidData_ShouldReturnTrue() {
+    void shouldReturnTrueWhenUpdateDriverCalledWithValidData() {
         // Given
         int driverId = 1;
         boolean isFree = true;
@@ -148,7 +148,7 @@ class DriverControllerTest {
     }
 
     @Test
-    void testUpdateDriverInfo_WithValidData_ShouldReturnDriverId() {
+    void shouldReturnDriverIdWhenUpdateDriverInfoCalledWithValidData() {
         // Given
         int driverId = 1;
         UpdateDriverDto updateDriverDto = new UpdateDriverDto();
