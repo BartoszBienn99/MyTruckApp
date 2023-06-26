@@ -1,9 +1,7 @@
 package com.MyTruckApp.controller;
 
 import com.MyTruckApp.dto.UpdateDriverDto;
-import com.MyTruckApp.model.Company;
 import com.MyTruckApp.model.Driver;
-import com.MyTruckApp.model.Truck;
 import com.MyTruckApp.service.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -39,6 +39,10 @@ public class TruckServiceImpl implements TruckService {
                 driver.setTruck(null);
                 driverRepository.save(driver);
             });
+            optionalTruck.ifPresent(truck -> {
+                truck.setTracks(null);
+                truckRepository.save(truck);
+            });
         }
         truckRepository.deleteById(id);
     }

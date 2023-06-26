@@ -16,7 +16,10 @@ public class Track {
     private String placeOfDeparture;
     private String placeOfDestination;
 
-    @ManyToMany(mappedBy = "tracks", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "truck_track",
+            joinColumns = @JoinColumn(name = "track_id"),
+            inverseJoinColumns = @JoinColumn(name = "truck_id"))
     private List<Truck> trucks;
 
     public Track(int id, String numberOfKilometers, String placeOfDeparture, String placeOfDestination, List<Truck> trucks) {

@@ -1,7 +1,8 @@
 package com.MyTruckApp.service;
 
-import com.MyTruckApp.model.Driver;
+import ch.qos.logback.core.pattern.parser.OptionTokenizer;
 import com.MyTruckApp.model.Track;
+import com.MyTruckApp.model.Truck;
 import com.MyTruckApp.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,14 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public void removeById(int id) {
-    trackRepository.deleteById(id);
+        Optional<Track> optionalTrack = trackRepository.findById(id);
+        if (optionalTrack.isPresent()) {
+            optionalTrack.ifPresent(track -> {
+                track.setTrucks(null);
+                trackRepository.save(track);
+            });
+            trackRepository.deleteById(id);
+        }
     }
 
     @Override
