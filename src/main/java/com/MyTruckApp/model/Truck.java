@@ -19,8 +19,8 @@ public class Truck {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "truck_track",
-    joinColumns = @JoinColumn(name = "truck_id"),
-    inverseJoinColumns = @JoinColumn(name = "track_id"))
+            joinColumns = @JoinColumn(name = "truck_id"),
+            inverseJoinColumns = @JoinColumn(name = "track_id"))
     private List<Track> tracks;
 
     @OneToOne(mappedBy = "truck")
