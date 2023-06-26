@@ -36,7 +36,7 @@ public class TruckServiceTest {
     }
 
     @Test
-    void testGetAllTrucks() {
+    void shouldReturnListOfTrucksWhenGetAllTrucksCalled() {
         // Given
         List<Truck> expectedTrucks = new ArrayList<>();
         expectedTrucks.add(new Truck());
@@ -53,7 +53,7 @@ public class TruckServiceTest {
     }
 
     @Test
-    void testAddTruck() {
+    void shouldReturnAddedTruckWhenAddTruckCalled() {
         // Given
         Truck truck = new Truck();
         when(truckRepository.save(truck)).thenReturn(truck);
@@ -67,7 +67,7 @@ public class TruckServiceTest {
     }
 
     @Test
-    void testRemoveById() {
+    void shouldRemoveTruckWhenRemoveByIdCalled() {
         // Given
         int truckId = 123;
         Truck truck = new Truck();
@@ -90,7 +90,7 @@ public class TruckServiceTest {
     }
 
     @Test
-    void testGetTruckById() {
+    void shouldReturnOptionalTruckWhenGetTruckByIdCalled() {
         // Given
         int truckId = 1;
         Truck truck = new Truck();
@@ -108,7 +108,7 @@ public class TruckServiceTest {
     }
 
     @Test
-    void testAddTrackToTruck() {
+    void shouldAddTrackToTruckWhenAddTrackToTruckCalled() {
         // Given
         Truck truck = new Truck();
         Track track = new Track();

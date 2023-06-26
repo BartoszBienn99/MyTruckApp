@@ -38,7 +38,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    public void testGetAllDrivers() {
+    public void shouldReturnListOfDriversWhenGetAllDriversCalled() {
         // Given
         List<Driver> drivers = new ArrayList<>();
         drivers.add(new Driver());
@@ -54,7 +54,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    public void testAddDriver() {
+    public void shouldReturnAddedDriverWhenAddDriverCalled() {
         // Given
         Driver driver = new Driver();
         when(driverRepository.save(any(Driver.class))).thenReturn(driver);
@@ -68,7 +68,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    public void testRemoveById_DriverExists() {
+    public void shouldRemoveDriverWhenRemoveByIdCalledWithExistingDriver() {
         // Given
         int driverId = 1;
         Driver driver = new Driver();
@@ -83,7 +83,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    public void testRemoveById_DriverDoesNotExist() {
+    public void shouldNotRemoveDriverWhenRemoveByIdCalledWithNonExistingDriver() {
         // Given
         int driverId = 1;
         when(driverRepository.findById(driverId)).thenReturn(Optional.empty());
@@ -97,7 +97,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    public void testSetIsFree_DriverExists() {
+    public void shouldSetDriverIsFreeWhenSetIsFreeCalledWithExistingDriver() {
         // Given
         int driverId = 1;
         boolean isFree = true;
@@ -114,7 +114,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    public void testSetIsFree_DriverDoesNotExist() {
+    public void shouldThrowExceptionWhenSetIsFreeCalledWithNonExistingDriver() {
         // Given
         int driverId = 1;
         boolean isFree = true;
@@ -128,7 +128,7 @@ public class DriverServiceTest {
 
 
     @Test
-    public void testGetDriverById_DriverExists() {
+    public void shouldReturnOptionalDriverWhenGetDriverByIdCalledWithExistingDriver() {
         // Given
         int driverId = 1;
         Driver driver = new Driver();
@@ -144,7 +144,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    public void testGetDriverById_DriverDoesNotExist() {
+    public void shouldThrowExceptionWhenGetDriverByIdCalledWithNonExistingDriver() {
         // Given
         int driverId = 1;
         when(driverRepository.findById(driverId)).thenReturn(Optional.empty());
@@ -155,7 +155,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    void testUpdateDriver_WithValidData_ShouldUpdateDriver() {
+    void shouldUpdateDriverWithValidData() {
         // Given
         Integer driverId = 1;
         UpdateDriverDto updateDriverDto = new UpdateDriverDto();
@@ -189,7 +189,7 @@ public class DriverServiceTest {
     }
 
     @Test
-    void testUpdateDriver_WithInvalidData_ShouldThrowException() {
+    void shouldThrowExceptionWhenUpdateDriverWithInvalidData() {
         // Given
         Integer driverId = 1;
         UpdateDriverDto updateDriverDto = new UpdateDriverDto();
