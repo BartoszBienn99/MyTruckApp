@@ -1,5 +1,6 @@
 package com.MyTruckApp.service;
 
+import com.MyTruckApp.exception_handler.IdNotFoundException;
 import com.MyTruckApp.model.Company;
 import com.MyTruckApp.model.Driver;
 import com.MyTruckApp.repository.CompanyRepository;
@@ -38,6 +39,8 @@ public class CompanyServiceImpl implements CompanyService {
                 driverRepository.save(driver);
             }
             companyRepository.deleteById(id);
+        }else {
+            throw new IdNotFoundException("Nie znaleziono firmy o id: " + id);
         }
     }
 
@@ -45,7 +48,7 @@ public class CompanyServiceImpl implements CompanyService {
     public Optional<Company> getCompanyById(int id) {
         Optional<Company> optional = companyRepository.findById(id);
         if (optional.isEmpty()) {
-            throw new RuntimeException("Nie znaleziono firmy o id: " + id);
+            throw new IdNotFoundException("Nie znaleziono firmy o id: " + id);
         }
         return optional;
     }

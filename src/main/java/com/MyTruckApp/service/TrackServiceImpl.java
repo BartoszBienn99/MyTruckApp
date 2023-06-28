@@ -1,8 +1,7 @@
 package com.MyTruckApp.service;
 
-import ch.qos.logback.core.pattern.parser.OptionTokenizer;
+import com.MyTruckApp.exception_handler.IdNotFoundException;
 import com.MyTruckApp.model.Track;
-import com.MyTruckApp.model.Truck;
 import com.MyTruckApp.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +34,8 @@ public class TrackServiceImpl implements TrackService {
                 trackRepository.save(track);
             });
             trackRepository.deleteById(id);
+        }else {
+            throw new IdNotFoundException("Nie znaleziono trasy o id: " + id);
         }
     }
 
@@ -43,7 +44,7 @@ public class TrackServiceImpl implements TrackService {
         Optional<Track> optional = trackRepository.findById(id);
         if(optional.isEmpty())
         {
-            throw new RuntimeException("Nie znaleziono trasy o id: " + id);
+            throw new IdNotFoundException("Nie znaleziono trasy o id: " + id);
         }
         return optional;
     }

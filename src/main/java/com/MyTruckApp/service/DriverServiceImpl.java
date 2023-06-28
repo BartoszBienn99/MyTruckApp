@@ -3,6 +3,7 @@ package com.MyTruckApp.service;
 
 
 import com.MyTruckApp.dto.UpdateDriverDto;
+import com.MyTruckApp.exception_handler.IdNotFoundException;
 import com.MyTruckApp.model.Company;
 import com.MyTruckApp.model.Driver;
 import com.MyTruckApp.model.Truck;
@@ -43,6 +44,8 @@ public class DriverServiceImpl implements DriverService {
         Optional<Driver> driverOptional = driverRepository.findById(id);
         if(driverOptional.isPresent()){
             driverRepository.deleteById(id);
+        } else {
+            throw new IdNotFoundException("Nie znaleziono kierowcy o id: " + id);
         }
     }
 
@@ -54,7 +57,7 @@ public class DriverServiceImpl implements DriverService {
             driver.setFree(isFree);
             driverRepository.save(driver);
         } else {
-            throw new RuntimeException("Nie znaleziono kierowcy o id: " + id);
+            throw new IdNotFoundException("Nie znaleziono kierowcy o id: " + id);
         }
 
     }
@@ -72,7 +75,7 @@ public class DriverServiceImpl implements DriverService {
             existingDriver.setCompany(existingCompany);
             driverRepository.save(existingDriver);
         } else {
-            throw new RuntimeException("Nie znaleziono Kierowcy/Ciężarówki/Firmy");
+            throw new IdNotFoundException("Nie znaleziono Kierowcy/Ciężarówki/Firmy");
         }
     }
 
@@ -81,7 +84,7 @@ public class DriverServiceImpl implements DriverService {
         Optional<Driver> optional = driverRepository.findById(id);
         if(optional.isEmpty())
         {
-            throw new RuntimeException("Nie znaleziono kierowcy o id: " + id);
+            throw new IdNotFoundException("Nie znaleziono kierowcy o id: " + id);
         }
         return optional;
     }

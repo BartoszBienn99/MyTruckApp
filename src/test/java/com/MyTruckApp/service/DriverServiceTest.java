@@ -1,6 +1,7 @@
 package com.MyTruckApp.service;
 
 import com.MyTruckApp.dto.UpdateDriverDto;
+import com.MyTruckApp.exception_handler.IdNotFoundException;
 import com.MyTruckApp.model.Company;
 import com.MyTruckApp.model.Driver;
 import com.MyTruckApp.model.Truck;
@@ -89,9 +90,10 @@ public class DriverServiceTest {
         when(driverRepository.findById(driverId)).thenReturn(Optional.empty());
 
         // When
-        driverService.removeById(driverId);
+        Throwable exception = assertThrows(IdNotFoundException.class, () -> driverService.removeById(driverId));
 
         // Then
+        assertEquals("Nie znaleziono kierowcy o id: " + driverId, exception.getMessage());
         verify(driverRepository, times(1)).findById(driverId);
         verify(driverRepository, never()).deleteById(anyInt());
     }

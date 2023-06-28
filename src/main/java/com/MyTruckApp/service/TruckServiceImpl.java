@@ -1,4 +1,5 @@
 package com.MyTruckApp.service;
+import com.MyTruckApp.exception_handler.IdNotFoundException;
 import com.MyTruckApp.model.Driver;
 import com.MyTruckApp.model.Track;
 import com.MyTruckApp.model.Truck;
@@ -52,7 +53,7 @@ public class TruckServiceImpl implements TruckService {
             Optional<Truck> optional = truckRepository.findById(id);
             if(optional.isEmpty())
             {
-                throw new RuntimeException("Nie znaleziono ciężarówki o id: " + id);
+                throw new IdNotFoundException("Nie znaleziono ciężarówki o id: " + id);
             }
             return optional;
     }
